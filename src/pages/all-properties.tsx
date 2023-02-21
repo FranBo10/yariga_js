@@ -87,6 +87,31 @@ const AllProperties = () => {
             color="#fcfcfc"
             disabled={!(current > 1)}       
           />
+          <Box
+          display={{ xs: 'hidden', sm: 'flex'}}
+          alignItems="center" gap="5px">
+            Page {' '}<strong>{current} of {pageCount}</strong>
+          </Box>
+          <CustomButton
+            title="Suivant"
+            handleClick={() => setCurrent((prev) => prev + 1)}
+            backgroundColor="#475be8"
+            color="#fcfcfc"
+            disabled={current === pageCount}       
+          />
+          <Select
+            variant="outlined"
+            color="info"
+            displayEmpty
+            required
+            inputProps={{ 'aria-label': 'Sans label'}}
+            defaultValue={10}
+            onChange={() => {}}
+            >
+              {[10, 20, 30, 40, 50].map((size) => (
+                <MenuItem key={size} value={size}>+ {size}</MenuItem>
+              ))}
+          </Select>
         </Box>
       )}
     </Box>
