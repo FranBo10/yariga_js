@@ -13,7 +13,7 @@ const PropertyCard = ( { id, title, price, location, photo } : PropertyCardProps
       maxWidth: '330px', 
       padding: '10px', 
       '&:hover': {
-      boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1)'
+      boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.4)'
     },
     cursor: 'pointer',
     textDecoration: 'none'
