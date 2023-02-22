@@ -60,7 +60,6 @@ const PropertyDetails = () => {
               style= {{ objectFit: "cover", borderRadius: '10px' }}
               className="property_details-img"
               />
-          </Box>
 
           <Box mt="15px">
             <Stack
@@ -78,12 +77,12 @@ const PropertyDetails = () => {
 
               <Stack
                 direction="row"
-                justifyContent="space-between"
                 flexWrap="wrap"
+                justifyContent="space-between"
                 alignItems="center"
                 gap={2}>
                   <Box>
-                    <Typography fontSize={22} fontWeight={600} color="#11142d" textTransform='capitalize'>{propertyDetails.title}</Typography>
+                    <Typography fontSize={22} fontWeight={600} mt="10px" color="#11142d">{propertyDetails.title}</Typography>
                     <Stack mt={0.5} direction="row" alignItems='center' gap={0.5}>
                       <Place sx={{ color:"#808191" }}/>
                       <Typography fontSize={14} color="#808191">{propertyDetails.location}</Typography>
@@ -91,21 +90,23 @@ const PropertyDetails = () => {
                   </Box>
 
                     <Box>
-                      <Typography fontSize={14} color="#808191">Prix</Typography>
-                      <Stack direction="row" flexWrap="wrap" alignItems="center">
-                        <Typography fontSize={22} fontWeight={600} color="#11142d" textTransform='capitalize'>{propertyDetails.price} €</Typography>
+                      <Typography fontSize={16} fontWeight={600} mt="10px" color="#11142D">Prix</Typography>
+                      <Stack direction="row" alignItems="flex-end" gap={1}>
+                        <Typography fontSize={25} fontWeight={700} color="#475BE8">{propertyDetails.price} €</Typography>
                         <Typography fontSize={14} color="#808191" ml={1} mt={1}>/mois</Typography>
-                    </Stack>
-                  </Box>                  
-              </Stack>
+                      </Stack>
+                    </Box>                  
+                </Stack>
                 
                   <Stack mt="25px" direction="column" gap="10px">
-                    <Typography fontSize={18} fontWeight={500} color="#11142d" textTransform='capitalize'>Description</Typography>  
+                    <Typography fontSize={18} color="#11142d" textTransform='capitalize'>Description</Typography>  
+                    <Typography fontSize={14} color="#808191">{propertyDetails.description}</Typography>
                     <ExpandMoreIcon />                  
                   </Stack>
-                  </Box>
+                </Box>
               </Box>
-              <Box width="100%" flex={1} maxWidth={326} display="flex" flexDirection="column" gap="20px">
+
+              <Box flex={1} maxWidth={{xs: '100%', md: 326}} display="flex" flexDirection="column" gap="20px">
               <Stack
                 width="100%"
                 p={2}
@@ -113,7 +114,8 @@ const PropertyDetails = () => {
                 justifyContent="center"
                 alignItems="center"
                 border="1px solid #E4E4E4"
-                borderRadius={2}>
+                borderRadius={2}
+                >
 
                   <Stack mt={2} justifyContent="center" alignItems="center" textAlign="center">
                     <img
@@ -121,11 +123,12 @@ const PropertyDetails = () => {
                     alt={propertyDetails.creator.name}
                     width={90}
                     height={90}
-                    style={{ borderRadius: '100%', objectFit: 'cover'}}/>
+                    style={{ borderRadius: '100%', objectFit: 'cover'}}
+                    />
 
                     <Box mt="15px">
                       <Typography fontSize={18} fontWeight={600} color="#11142d" textTransform='capitalize'>{propertyDetails.creator.name}</Typography>
-                      <Typography fontSize={14} color="#808191">Agent</Typography>
+                      <Typography mt="5px" fontSize={14} fontWeight={400} color="#808191">Agent</Typography>
                     </Box>
 
                     <Stack mt="15px" direction="row" alignItems='center' gap={1}>
@@ -147,8 +150,7 @@ const PropertyDetails = () => {
                         if (isCurrentUser) {
                           navigate(`/properties/edit/${propertyDetails._id}`);
                         }                        
-                      }}
-                      
+                      }}                      
                     />
                     <CustomButton
                       title={!isCurrentUser ? 'Call' : 'Delete'}
@@ -158,10 +160,10 @@ const PropertyDetails = () => {
                       icon={!isCurrentUser ? <Phone /> : <Delete />}
                       handleClick={() => {
                         if(!isCurrentUser) handleDeleteProperty();
-
                       }}
                     />
                   </Stack>
+                </Stack>
 
                   <Stack>
                     <img
@@ -185,11 +187,11 @@ const PropertyDetails = () => {
                     }}
                   />                 
                 </Box>
-              </Stack>
             </Box>
           </Box>
+        </Box>
     
   )
-}
+};
 
 export default PropertyDetails
