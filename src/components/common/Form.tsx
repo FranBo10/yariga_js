@@ -1,9 +1,22 @@
 import { Box, Typography, FormControl, FormHelperText, TextField, TextareaAutosize, Stack, Select, MenuItem, Button} from '@pankod/refine-mui'
-
+import { useState } from 'react'
 import {FormProps} from 'interfaces/common';
 import CustomButton from './CustomButton';
 
 const Form = ({ type, register, formLoading, handleSubmit, handleImageChange, onFinishHandler, propertyImage} : FormProps) => {
+  
+  const [descriptionPlaceholder, setDescriptionPlaceholder] = useState<string>('Décrivez la propriété');
+
+  const handleDescriptionFocus = () => {
+    setDescriptionPlaceholder('');
+  };
+
+  const handleDescriptionBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    if (event.target.value === '') {
+      setDescriptionPlaceholder('Décrivez la propriété');
+    }
+  }
+  
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="#11142d">{type} propriété</Typography>
@@ -17,7 +30,7 @@ const Form = ({ type, register, formLoading, handleSubmit, handleImageChange, on
           sx={{
             fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'
           }}
-          >Nom de la propriété :</FormHelperText>
+          >Titre de l'annonce :</FormHelperText>
             <TextField
             fullWidth
             required
@@ -32,14 +45,17 @@ const Form = ({ type, register, formLoading, handleSubmit, handleImageChange, on
           sx={{
             fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'
           }}
-          >Description de la propriété :</FormHelperText>
+          >Description :</FormHelperText>
             <TextareaAutosize
             minRows={5}
+            maxlength={1000}
             required
-            placeholder="Déscrivez la propriété"
+            placeholder={descriptionPlaceholder}
             color="info"
             style={{ width: '100%', background: 'transparent', fontSize: '12px', borderColor: 'rgba(0,0,0,0.23)', borderRadius: 6, padding: 10, color: '#919191'}}
             {...register('description', {required: true})}
+            onFocus={handleDescriptionFocus}
+            onBlur={handleDescriptionBlur}
            
             />          
         </FormControl>
@@ -60,6 +76,7 @@ const Form = ({ type, register, formLoading, handleSubmit, handleImageChange, on
             {...register('propertyType', {required: true})}>
               <MenuItem value="appartement">Appartement</MenuItem>
               <MenuItem value="maison">Maison</MenuItem>
+              <MenuItem value="chalet">Chalet</MenuItem>
               <MenuItem value="villa">Villa</MenuItem>
               <MenuItem value="Studio">Studio</MenuItem>
               <MenuItem value="chambre">Chambre</MenuItem>
@@ -131,5 +148,6 @@ const Form = ({ type, register, formLoading, handleSubmit, handleImageChange, on
     </Box>
   )
 }
+
 
 export default Form
